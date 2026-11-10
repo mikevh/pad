@@ -23,4 +23,11 @@ PAD_TEST_BLOB_CONNECTION="UseDevelopmentStorage=true" dotnet test   # also runs 
 
 ## Deploy
 
-`infra/main.bicep` defines the Azure resources. The app is published with `npm --prefix web run build` then `dotnet publish src/Pad.Api` and zip-deployed. Do not deploy before passkey auth (Milestone 5) lands: the API has no login yet.
+`infra/main.bicep` defines the Azure resources (already deployed). To ship a new version, sign in once with `az login`, then:
+
+```bash
+scripts/deploy.sh                # build UI, run tests, publish, zip-deploy to Azure, health check
+scripts/deploy.sh --skip-tests   # same without the test run
+```
+
+GitHub Actions (`.github/workflows/ci.yml`) only builds and tests on push and pull requests. It has no access to Azure; deploying is always a deliberate, local step.
