@@ -1,0 +1,9 @@
+bin/
+obj/
+node_modules/
+dist/
+*.zip
+.env
+src/Pad.Api/wwwroot/
+.playwright-mcp/
+.DS_Store
